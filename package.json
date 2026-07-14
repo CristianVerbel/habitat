@@ -1,0 +1,10 @@
+{
+  "name": "kai-landing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing page de KAI — Barranquilla. Sitio estático, sin build step.",
+  "scripts": {
+    "dev": "npx serve .",
+    "start": "npx serve ."
+  }
+}
