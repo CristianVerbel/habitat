@@ -30,3 +30,4 @@ jobs:
           path: '.'
       - id: deployment
         uses: actions/deploy-pages@v4
+# retry pages deploy 1783999265
