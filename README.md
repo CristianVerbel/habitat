@@ -7,7 +7,7 @@ Landing page de una sola página para el proyecto inmobiliario KAI (Barranquilla
 ```
 kai-landing/
 ├── index.html          ← página completa (todo el contenido y estilos)
-├── assets/
+├── assets/              ← copia local de respaldo; index.html usa las de Supabase Storage (ver abajo)
 │   ├── kai-wordmark.jpg     ← logotipo cinemático (hero)
 │   ├── og-image.jpg         ← imagen para previews de redes sociales
 │   ├── favicon-32.png
@@ -16,6 +16,23 @@ kai-landing/
 ├── robots.txt
 └── README.md            ← este archivo
 ```
+
+## Imágenes: servidas desde el Supabase de Vendu
+
+Las imágenes (`og:image`, favicons, wordmark) están subidas al bucket público
+`kai-landing` en el proyecto Supabase de Vendu y `index.html` las referencia
+directamente desde ahí:
+`https://lahexnphsecabgdtpska.supabase.co/storage/v1/object/public/kai-landing/assets/...`
+
+**La página (`index.html`) en sí NO puede vivir en ese mismo Supabase.** Se intentó
+servirla tanto vía Storage como vía Edge Function, y en ambos casos la plataforma
+fuerza `Content-Type: text/plain` + `Content-Security-Policy: sandbox` sobre
+cualquier contenido que detecta como HTML — es una protección anti-XSS/phishing
+a nivel de plataforma (no hay opción de proyecto para desactivarla), así que el
+JS, el CSS y el formulario simplemente no se ejecutarían. Por eso `index.html`
+debe desplegarse en un host estático normal (ver "Desplegar" abajo); todo lo
+demás — captura de leads, CRM, campaña, imágenes — sí vive 100% en el Supabase
+de Vendu.
 
 ## ⚠️ Antes de publicar — 2 cosas que EDITAR
 
