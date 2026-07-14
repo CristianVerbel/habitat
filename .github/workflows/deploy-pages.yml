@@ -33,3 +33,4 @@ jobs:
 # retry pages deploy 1783999265
 # check deploy 1783999814
 # retry after enabling Pages source + public 1784029790
+# retry after fixing workflow permissions (read+write) 1784030517
